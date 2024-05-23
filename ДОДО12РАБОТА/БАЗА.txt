@@ -1,0 +1,76 @@
+1.СНАЧАЛА БАЗА |
+2.ТРИГГЕР   |  <
+3.ВСТАВКА   <
+
+
+
+
+
+--create database DODO215BDGOLUBTSOV;
+--go
+--use DODO215BDGOLUBTSOV;
+--go
+--CREATE TABLE Rabotnik (
+--    id INT IDENTITY PRIMARY KEY not null,
+--    f NVARCHAR(255),
+--    i NVARCHAR(255),
+--    o NVARCHAR(255),
+--    post NVARCHAR(255),
+--    dtr NVARCHAR(255),
+--    adress NVARCHAR(255),
+--    phone NVARCHAR(255)
+--);
+--CREATE TABLE Ingridient (
+--    id INT IDENTITY PRIMARY KEY not null,
+--    _name NVARCHAR(255),
+--    _description NVARCHAR(255),
+--    nalichie NVARCHAR(255)
+--);
+--CREATE TABLE Pitsa (
+--    id INT IDENTITY PRIMARY KEY not null,
+--    _name NVARCHAR(255),
+--    _description NVARCHAR(255),
+--    idINGRIDIENTS INT REFERENCES Ingridient(id),
+--    price INT
+--);
+--CREATE TABLE Client (
+--    id INT IDENTITY PRIMARY KEY not null,
+--    _name NVARCHAR(255)
+--);
+--CREATE TABLE Zakaz (
+--    id INT IDENTITY PRIMARY KEY not null,
+--    Client_id INT REFERENCES Client(id),
+--    Pitsa_id INT REFERENCES Pitsa(id),
+--    kolvo INT,
+--    itogprice INT,
+--    datatime NVARCHAR(255)
+--);
+
+-- Вставка данных в таблицу Rabotnik
+INSERT INTO Rabotnik (f, i, o, dateOfEmployment, adress, phone) VALUES
+('Иванов', 'Иван', 'Иванович', '2023-01-15', 'ул. Ленина, 1', '+79123456789'),
+('Петрова', 'Мария', 'Сергеевна', '2023-02-20', 'ул. Пушкина, 2', '+79876543210');
+
+-- Вставка данных в таблицу Ingridient
+INSERT INTO Ingridient (_name, _description, nalichie) VALUES
+('Тесто', 'Пшеничное тесто для пиццы', 'В наличии'),
+('Сыр Моцарелла', 'Итальянский сыр', 'В наличии'),
+('Томатный соус', 'Классический томатный соус', 'В наличии'),
+('Пепперони', 'Острая итальянская колбаса', 'В наличии'),
+('Грибы', 'Шампиньоны', 'В наличии');
+
+-- Вставка данных в таблицу Pitsa
+INSERT INTO Pitsa (_name, _description, idINGRIDIENTS, price) VALUES
+('Пепперони', 'Пицца с пепперони и сыром', 4, 500),
+('Маргарита', 'Классическая пицца с томатным соусом и сыром', 2, 450),
+('Грибная', 'Пицца с грибами и сыром', 5, 480);
+
+-- Вставка данных в таблицу Client
+INSERT INTO Client (_name) VALUES
+('Сидоров Иван'),
+('Петрова Анна');
+
+-- Вставка данных в таблицу Zakaz
+INSERT INTO Zakaz (Client_id, Pitsa_id, kolvo, itogprice, datatime) VALUES
+(1, 1, 2, 1000, '2023-03-10 12:00:00'),
+(2, 2, 1, 450, '2023-03-10 13:30:00');

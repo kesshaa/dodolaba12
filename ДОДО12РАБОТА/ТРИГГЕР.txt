@@ -1,0 +1,20 @@
+use DODO215BDGOLUBTSOV;
+go
+CREATE TRIGGER ItogPrice
+ON Zakaz
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @Client_id INT, @Pitsa_id INT, @kolvo INT, @itogprice INT, @datatime NVARCHAR(255), @price INT;
+    SELECT @Client_id = Client_id, @Pitsa_id = Pitsa_id, @kolvo = kolvo, @datatime = datatime
+    FROM INSERTED;
+    SELECT @price = price
+    FROM Pitsa
+    WHERE id = @Pitsa_id;
+    SET @itogprice = @price * @kolvo;
+
+    UPDATE Zakaz
+    SET itogprice = @itogprice
+    WHERE id IN (SELECT id FROM INSERTED);
+END;
